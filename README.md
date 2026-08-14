@@ -61,4 +61,4 @@ Word-based chunking (800 words, 100 overlap) over character-based — more stabl
 
 ---
 
-Built by [Moritz Richter](https://www.linkedin.com/in/morichtereur) · Finance & Strategy Consultant · Zürich
+Built by [Moritz Richter](https://www.linkedin.com/in/moritz-richter-28297119a) · Finance & Strategy Consultant · Zürich

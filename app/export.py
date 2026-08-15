@@ -16,7 +16,7 @@ from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.enums import TA_LEFT, TA_RIGHT
 
 from app.branding import company_meta
-from app.llm import CITATION_RE, _pages_by_company, _resolve
+from app.llm import CITATION_RE, _pages_by_company, _resolve, page_label
 
 INK = colors.HexColor("#171B16")
 NAVY = colors.HexColor("#15222B")
@@ -194,10 +194,11 @@ def build_memo_pdf(
     ]]
     for c in chunks:
         meta = company_meta(c["company"])
+        start, end = c["approx_page"], c.get("end_page", c["approx_page"])
         is_cited = any(
             cc == c["company"]
             and (cy is None or cy == str(c["year"] or ""))
-            and abs(cp - int(c["approx_page"] or 0)) <= 3
+            and start - 1 <= cp <= end + 1
             for cc, cy, cp in cited_pages
         )
         status = Paragraph('<font color="#1E6B45"><b>CITED</b></font>' if is_cited else "retrieved", styles["tdMuted"])
@@ -206,7 +207,7 @@ def build_memo_pdf(
         table_data.append([
             Paragraph(meta["name"], styles["td"]),
             Paragraph((c["section"] or "").replace("_", " ").title(), styles["tdMuted"]),
-            Paragraph(f"{year_tag}p.~{c['approx_page']}", styles["tdMuted"]),
+            Paragraph(f"{year_tag}{page_label(c)}", styles["tdMuted"]),
             Paragraph(score_text, styles["tdMuted"]),
             status,
         ])

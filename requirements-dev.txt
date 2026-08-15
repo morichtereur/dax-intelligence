@@ -1,0 +1,7 @@
+# Deliberately not "-r requirements.txt": tests/ only exercises
+# pipeline/chunking.py and pipeline/pdf_utils.py (see tests/conftest.py),
+# never app/*, so CI doesn't need chromadb/sentence-transformers/torch etc.
+# just to run pytest -- keeps CI fast and independent of the ML runtime.
+pypdf
+reportlab<5
+pytest

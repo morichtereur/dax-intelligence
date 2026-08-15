@@ -5,7 +5,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
 from app.retriever import retrieve, get_companies, get_years, collection, MIN_RELEVANCE, LOW_CONFIDENCE
-from app.llm import ask, verify_citations, highlight_citations
+from app.llm import ask, verify_citations, highlight_citations, page_label, estimate_cost
 from app.branding import COMPANIES, company_meta, logo_data_uri, author_photo_uri, report_pdf_url
 from app.export import build_memo_pdf
 
@@ -524,7 +524,8 @@ if query:
         scored = [c["score"] for c in chunks if c["score"] is not None]
         best_score = max(scored) if scored else MIN_RELEVANCE
         with st.spinner("Drafting memo…"):
-            answer = ask(query, chunks, compare_mode=compare_mode)
+            result = ask(query, chunks, compare_mode=compare_mode)
+        answer, usage = result["text"], result["usage"]
 
         citations = verify_citations(answer, chunks)
         cited_companies = {c["company"] for c in citations if c["verified"]}
@@ -570,6 +571,14 @@ if query:
             </div>
             """, unsafe_allow_html=True)
 
+        if usage:
+            cost = estimate_cost(usage)
+            st.markdown(
+                f'<div class="verify-line">{usage["input_tokens"]:,} input / '
+                f'{usage["output_tokens"]:,} output tokens · ~${cost:.3f} this query</div>',
+                unsafe_allow_html=True,
+            )
+
         pdf_bytes = build_memo_pdf(
             query=query, answer=answer, chunks=chunks, citations=citations,
             best_score=best_score, low_confidence=best_score < LOW_CONFIDENCE,
@@ -595,10 +604,11 @@ if query:
         for c in chunks:
             meta = company_meta(c["company"])
             logo_uri = logo_data_uri(meta["logo"]) if meta.get("logo") else ""
+            start, end = c["approx_page"], c.get("end_page", c["approx_page"])
             is_cited = any(
                 cc == c["company"]
                 and (cy is None or cy == str(c["year"] or ""))
-                and abs(cp - int(c["approx_page"] or 0)) <= 3
+                and start - 1 <= cp <= end + 1
                 for cc, cy, cp in cited_pages
             )
             flag = '<span class="flag-ok">CITED</span>' if is_cited else '<span class="flag-dim">retrieved</span>'
@@ -611,11 +621,11 @@ if query:
 
             pdf_url = report_pdf_url(c["company"], str(c["year"] or "2025"), c["approx_page"])
             year_tag = f"FY{str(c['year'])[-2:]} · " if len(years_present) > 1 and c["year"] else ""
-            page_label = f"{year_tag}p.~{c['approx_page']}"
+            page_text = f"{year_tag}{page_label(c)}"
             if pdf_url:
-                page_html = f'<a href="{pdf_url}" target="_blank" title="Open the source report at this page">{page_label}</a>'
+                page_html = f'<a href="{pdf_url}" target="_blank" title="Open the source report at this page">{page_text}</a>'
             else:
-                page_html = page_label
+                page_html = page_text
 
             rows.append(f"""
             <div class="audit-row">
@@ -632,7 +642,7 @@ if query:
         with st.expander("Read the retrieved excerpts in full"):
             for c in chunks:
                 meta = company_meta(c["company"])
-                st.markdown(f"**{meta['name']} — {(c['section'] or '').replace('_',' ').title()} — p.~{c['approx_page']}**")
+                st.markdown(f"**{meta['name']} — {(c['section'] or '').replace('_',' ').title()} — {page_label(c)}**")
                 st.caption(c["text"][:600] + ("…" if len(c["text"]) > 600 else ""))
                 st.markdown("---")
 

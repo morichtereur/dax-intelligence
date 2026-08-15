@@ -1,0 +1,20 @@
+{
+  "_readme": "Gold set for retrieval precision@k/recall@k. Every query names its expected company/companies explicitly in the question itself — that's what makes 'expected_companies' an objective label rather than a judgment call (unlike a topic query such as 'which companies discussed cost cuts', whose true answer set can only be known by reading every report). 'expected_companies' values must match the filename prefix convention pipeline/ingest.py uses (company = filename.split('_')[0]) — see app/branding.py's COMPANIES list for the canonical key per constituent (e.g. VW, not Volkswagen; Mercedes, not MercedesBenz).",
+  "queries": [
+    {"query": "How is Volkswagen addressing the EV transition financially?", "expected_companies": ["VW"]},
+    {"query": "What does BMW say about its 2025 strategic priorities?", "expected_companies": ["BMW"]},
+    {"query": "Compare how BMW and Mercedes-Benz frame EV investment costs", "expected_companies": ["BMW", "Mercedes"]},
+    {"query": "What is Siemens Energy's outlook for 2025?", "expected_companies": ["SiemensEnergy"]},
+    {"query": "Compare Siemens and Siemens Energy's segment reporting", "expected_companies": ["Siemens", "SiemensEnergy"]},
+    {"query": "What does Allianz's CFO say about macroeconomic risk?", "expected_companies": ["Allianz"]},
+    {"query": "Compare Allianz and Munich Re's risk reporting", "expected_companies": ["Allianz", "MunichRe"]},
+    {"query": "What is SAP's strategic priority for 2025?", "expected_companies": ["SAP"]},
+    {"query": "What does Infineon say about semiconductor demand outlook?", "expected_companies": ["Infineon"]},
+    {"query": "What does BASF's management report say about chemicals demand?", "expected_companies": ["BASF"]},
+    {"query": "What does Bayer say about its pharmaceutical pipeline?", "expected_companies": ["Bayer"]},
+    {"query": "What does Beiersdorf's management report say about NIVEA brand performance?", "expected_companies": ["Beiersdorf"]},
+    {"query": "What does DHL Group say about e-commerce logistics volumes?", "expected_companies": ["DHL"]},
+    {"query": "What does Henkel say about adhesive technologies demand?", "expected_companies": ["Henkel"]},
+    {"query": "What does Merck KGaA say about its life science business?", "expected_companies": ["Merck"]}
+  ]
+}

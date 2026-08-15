@@ -74,7 +74,15 @@ def _to_chunk(id_: str, text: str, meta: dict, score: float | None, via: str) ->
         "company": meta.get("company"),
         "year": meta.get("year"),
         "section": meta.get("section"),
+        # Real word-level page range from pipeline/chunking.py (not the
+        # linear chunk-index/total-chunks estimate the original pipeline
+        # used) — approx_page is kept as the field name so every existing
+        # consumer (llm.py, app.py, export.py) needs no signature change,
+        # but the value itself is now exact, and end_page lets citation
+        # checks verify against the chunk's real span instead of a fixed
+        # +/-3 fudge factor.
         "approx_page": meta.get("approx_page"),
+        "end_page": meta.get("end_page", meta.get("approx_page")),
         "source": meta.get("source"),
         "score": score,
         "via": via,
@@ -148,3 +156,17 @@ def get_years() -> list[str]:
     results = collection.get(include=["metadatas"])
     years = sorted(set(m["year"] for m in results["metadatas"] if m.get("year")))
     return years
+
+
+def relevant_companies(query: str, n_results: int = 8, company_filter: str = None,
+                        max_companies: int = 4) -> list[str]:
+    """Distinct companies among the top retrieved chunks, ranked by their
+    best-matching chunk — used by the eval harness (precision/recall against
+    a gold set names companies, not chunks) rather than by the app itself,
+    which reads chunk-level results directly."""
+    chunks = retrieve(query, n_results=n_results, company_filter=company_filter)
+    companies = []
+    for c in chunks:
+        if c["company"] not in companies:
+            companies.append(c["company"])
+    return companies[:max_companies]

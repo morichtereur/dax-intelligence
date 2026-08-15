@@ -10,22 +10,25 @@ client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 MODEL = "claude-sonnet-4-5"
 
-# List price, $ per 1M tokens -- keyed by MODEL so cost estimates stay
-# correct if the model is ever migrated without a separate edit here.
+# List price, $ per 1M tokens -- keyed by model id so both ask()'s
+# generation calls and the eval harness's judge calls (a cheaper model)
+# price correctly from the same table.
 PRICING_PER_MILLION = {
     "claude-sonnet-4-5": {"input": 3.00, "output": 15.00},
+    "claude-haiku-4-5": {"input": 1.00, "output": 5.00},
 }
 
 
-def estimate_cost(usage: dict | None) -> float:
-    """USD estimate for one ask() call from its usage dict, at MODEL's list
-    price. Every query attaches the full trimmed PDF for each matched
-    company (not just a retrieved snippet), so input tokens -- and cost --
-    scale with company count and report length in a way the old
-    chunk-retrieval architecture didn't."""
+def estimate_cost(usage: dict | None, model: str = MODEL) -> float:
+    """USD estimate for one API call from its usage dict, at the given
+    model's list price (defaults to MODEL, the generation model). Every
+    query attaches the full trimmed PDF for each matched company (not just
+    a retrieved snippet), so input tokens -- and cost -- scale with company
+    count and report length in a way the old chunk-retrieval architecture
+    didn't."""
     if not usage:
         return 0.0
-    price = PRICING_PER_MILLION.get(MODEL, {"input": 0.0, "output": 0.0})
+    price = PRICING_PER_MILLION.get(model, {"input": 0.0, "output": 0.0})
     return (usage["input_tokens"] / 1_000_000 * price["input"]
             + usage["output_tokens"] / 1_000_000 * price["output"])
 

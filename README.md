@@ -103,14 +103,21 @@ actual attached PDF at that page, and confirms the cited text is really
 there — checking this project's own offset-correction pipeline, not
 whether Claude hallucinates (it structurally can't invent a citation's
 *location*, since the API extracts citations from the attached document).
-It also reports citation coverage of the answer text as a rough
-faithfulness proxy — how much of the answer is backed by a citation at all,
-not a claim-by-claim faithfulness check — and token usage / $ cost per
-query. Cost tracking matters specifically for this architecture: every
+
+It reports two faithfulness signals: a free citation-coverage proxy (how
+much of the answer's text falls inside *some* citation — cheap, but not
+claim-aware), and a claim-level check via a judge model call
+(`judge_faithfulness`, on Haiku for cost) that splits the answer into its
+individual factual claims and checks each one against the citations
+actually returned, printing any claim it can't ground. Coverage is a smoke
+test; the judge is the real check.
+
+It also reports token usage / $ cost per query (generation + judge
+combined). Cost tracking matters specifically for this architecture: every
 query attaches the *full* trimmed PDF for each matched company rather than
 a retrieved snippet, so cost scales with company count and report length,
 not with how much text is actually relevant to the question. The Streamlit
-app shows the same per-query estimate under each answer.
+app shows the generation-only estimate under each answer.
 
 ## Stack
 

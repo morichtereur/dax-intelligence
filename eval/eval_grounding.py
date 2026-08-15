@@ -17,6 +17,12 @@ same as any RAG system with free-text sources) -- it only tells you how much
 of the answer is backed by a citation at all versus how much is unbacked
 prose (synthesis, transitions, or unsupported claims).
 
+Also reports token usage and $ cost per query. This matters specifically
+for this architecture: unlike chunk-based retrieval, every query attaches
+the *full* trimmed PDF for each matched company, so cost scales with company
+count and report length, not with how much text is actually relevant --
+worth watching as the gold set or max_companies grows.
+
 Costs real API calls. Run: .venv/bin/python eval/eval_grounding.py
 """
 
@@ -29,7 +35,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from app.llm import ask
+from app.llm import ask, estimate_cost
 from app.retriever import relevant_companies
 from pdf_utils import extract_text_by_page, get_original_page_offset
 
@@ -79,6 +85,7 @@ def main() -> None:
     print(f"Grounding eval: {len(gold)} queries, real API calls\n")
     n_citations = n_grounded = 0
     coverages = []
+    costs = []
 
     for item in gold:
         companies = relevant_companies(item["query"], n_results=8, max_companies=4)
@@ -99,9 +106,15 @@ def main() -> None:
         cov = coverage(result["text"], citations)
         coverages.append(cov)
 
+        cost = estimate_cost(result["usage"])
+        costs.append(cost)
+        usage = result["usage"] or {"input_tokens": 0, "output_tokens": 0}
+
         print(f"{item['query']!r}")
-        print(f"    {len(citations)} citations, {grounded_here} verified grounded, "
-              f"coverage={cov:.0%}\n")
+        print(f"    {len(companies)} companies, {len(citations)} citations, "
+              f"{grounded_here} verified grounded, coverage={cov:.0%}")
+        print(f"    {usage['input_tokens']:,} input / {usage['output_tokens']:,} output "
+              f"tokens, ~${cost:.3f}\n")
 
     if n_citations == 0:
         print("No citations were returned for any query -- nothing to evaluate. "
@@ -112,6 +125,8 @@ def main() -> None:
           f"verified against the actual source PDF")
     print(f"Mean citation coverage of answer text: {sum(coverages)/len(coverages):.1%} "
           f"(faithfulness proxy, not a claim-level check)")
+    print(f"Total cost for this run: ${sum(costs):.3f} "
+          f"(mean ${sum(costs)/len(costs):.3f}/query, at list price, {len(costs)} queries)")
 
 
 if __name__ == "__main__":

@@ -8,6 +8,28 @@ load_dotenv()
 
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
+MODEL = "claude-sonnet-4-5"
+
+# List price, $ per 1M tokens -- keyed by MODEL so cost estimates stay
+# correct if the model is ever migrated without a separate edit here.
+PRICING_PER_MILLION = {
+    "claude-sonnet-4-5": {"input": 3.00, "output": 15.00},
+}
+
+
+def estimate_cost(usage: dict | None) -> float:
+    """USD estimate for one ask() call from its usage dict, at MODEL's list
+    price. Every query attaches the full trimmed PDF for each matched
+    company (not just a retrieved snippet), so input tokens -- and cost --
+    scale with company count and report length in a way the old
+    chunk-retrieval architecture didn't."""
+    if not usage:
+        return 0.0
+    price = PRICING_PER_MILLION.get(MODEL, {"input": 0.0, "output": 0.0})
+    return (usage["input_tokens"] / 1_000_000 * price["input"]
+            + usage["output_tokens"] / 1_000_000 * price["output"])
+
+
 SYSTEM_PROMPT = """You are a senior finance and strategy analyst reviewing DAX 40 annual reports.
 Your role is to extract and synthesize insights with the precision of a top-tier management consultant.
 
@@ -24,7 +46,7 @@ supported by the attached documents.
 Format: concise paragraphs. Use bullet points only for direct comparisons or lists of findings."""
 
 def ask(query: str, companies: list[str], compare_mode: bool = False) -> dict:
-    """Returns {"text": answer prose, "citations": [...]}.
+    """Returns {"text": answer prose, "citations": [...], "usage": {...}}.
 
     Citations come from the Claude API's own PDF citations feature
     (citations: enabled on each document block) rather than being written
@@ -42,7 +64,7 @@ def ask(query: str, companies: list[str], compare_mode: bool = False) -> dict:
     """
     document_blocks, page_offsets = load_company_documents(companies)
     if not document_blocks:
-        return {"text": "No matching reports found for this query.", "citations": []}
+        return {"text": "No matching reports found for this query.", "citations": [], "usage": None}
 
     instruction = f"Question: {query}"
     if compare_mode:
@@ -50,7 +72,7 @@ def ask(query: str, companies: list[str], compare_mode: bool = False) -> dict:
                          "highlight similarities, differences, and any notable outliers.")
 
     response = client.messages.create(
-        model="claude-sonnet-4-5",
+        model=MODEL,
         max_tokens=1500,
         system=SYSTEM_PROMPT,
         messages=[{
@@ -75,4 +97,8 @@ def ask(query: str, companies: list[str], compare_mode: bool = False) -> dict:
                 "end_page": (c.end_page_number - 1) + offset - 1,  # -1: exclusive -> inclusive
             })
 
-    return {"text": "".join(text_parts), "citations": citations}
+    usage = {
+        "input_tokens": response.usage.input_tokens,
+        "output_tokens": response.usage.output_tokens,
+    }
+    return {"text": "".join(text_parts), "citations": citations, "usage": usage}

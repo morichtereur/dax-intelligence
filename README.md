@@ -105,7 +105,12 @@ whether Claude hallucinates (it structurally can't invent a citation's
 *location*, since the API extracts citations from the attached document).
 It also reports citation coverage of the answer text as a rough
 faithfulness proxy — how much of the answer is backed by a citation at all,
-not a claim-by-claim faithfulness check.
+not a claim-by-claim faithfulness check — and token usage / $ cost per
+query. Cost tracking matters specifically for this architecture: every
+query attaches the *full* trimmed PDF for each matched company rather than
+a retrieved snippet, so cost scales with company count and report length,
+not with how much text is actually relevant to the question. The Streamlit
+app shows the same per-query estimate under each answer.
 
 ## Stack
 

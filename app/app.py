@@ -4,7 +4,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
 from app.retriever import relevant_companies, get_companies
-from app.llm import ask
+from app.llm import ask, estimate_cost
 
 st.set_page_config(
     page_title="DAX Intelligence",
@@ -152,6 +152,14 @@ if query:
         st.markdown(
             "**Sources:** " + " · ".join(f"`{c}`" for c in matched_companies)
         )
+
+        usage = result["usage"]
+        if usage:
+            cost = estimate_cost(usage)
+            st.caption(
+                f"~{usage['input_tokens']:,} input / {usage['output_tokens']:,} output "
+                f"tokens · ~${cost:.3f} this query"
+            )
 
         citations = result["citations"]
         with st.expander(f"📄 Citations ({len(citations)})"):

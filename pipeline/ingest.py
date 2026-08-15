@@ -5,59 +5,18 @@ from dotenv import load_dotenv
 import chromadb
 
 from pdf_utils import extract_text_by_page, get_original_page_offset
+from chunking import detect_section, chunk_pages
 
 load_dotenv()
 
 CHROMA_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
 RAW_DIR = Path(__file__).parent.parent / "data" / "raw"
-CHUNK_SIZE = 800
-CHUNK_OVERLAP = 100
-
-SECTION_MARKERS = [
-    "letter to shareholders", "cfo letter", "management report",
-    "risk report", "opportunity report", "consolidated statements",
-    "notes to consolidated", "supervisory board report",
-    "corporate governance", "sustainability", "segment report",
-    "outlook", "guidance", "strategy"
-]
 
 client = chromadb.PersistentClient(path=CHROMA_DIR)
 collection = client.get_or_create_collection(
     name="dax_reports",
     metadata={"hnsw:space": "cosine"}
 )
-
-def detect_section(text: str) -> str:
-    lower = text.lower()
-    for marker in SECTION_MARKERS:
-        if marker in lower:
-            return marker.replace(" ", "_")
-    return "general"
-
-def chunk_pages(pages: list[dict], chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list[dict]:
-    """Chunk across pages by word count, same window size as before, but
-    keeping each chunk's real page range instead of estimating it later.
-
-    The previous approach joined every page into one string first, chunked
-    that, and then guessed a chunk's page from its position alone
-    (chunk_index / total_chunks * total_pages) -- a linear-interpolation
-    estimate that assumes every page has equal text density, and that drifts
-    further from the truth the longer the document is. Tracking (word, page)
-    pairs from the start makes start_page/end_page exact, not estimated.
-    """
-    word_pages = [(w, p["page"]) for p in pages for w in p["text"].split()]
-
-    chunks, i = [], 0
-    while i < len(word_pages):
-        window = word_pages[i:i + chunk_size]
-        page_nums = [pg for _, pg in window]
-        chunks.append({
-            "text": " ".join(w for w, _ in window),
-            "start_page": min(page_nums),
-            "end_page": max(page_nums),
-        })
-        i += chunk_size - overlap
-    return chunks
 
 def ingest_pdf(pdf_path: Path):
     parts = pdf_path.stem.split("_")

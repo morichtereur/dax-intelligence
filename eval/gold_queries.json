@@ -1,0 +1,15 @@
+{
+  "_readme": "Starter gold set for retrieval precision@k/recall@k. Every query here names its expected company/companies explicitly in the question itself -- that's what makes 'expected_companies' an objective label rather than a judgment call (unlike a topic query such as 'which companies discussed cost cuts', where the true answer set can only be known by reading every report). 'expected_companies' values must match the filename prefix convention ingest.py uses (company = filename.split('_')[0]) -- rename the reports you actually ingest to match, or edit these values to match your filenames. Extend this list as you add more companies; keep every new entry company-named for the same reason.",
+  "queries": [
+    {"query": "How is Volkswagen addressing the EV transition financially?", "expected_companies": ["Volkswagen"]},
+    {"query": "What does BMW say about its 2025 strategic priorities?", "expected_companies": ["BMW"]},
+    {"query": "Compare how BMW and MercedesBenz frame EV investment costs", "expected_companies": ["BMW", "MercedesBenz"]},
+    {"query": "What is Siemens Energy's outlook for 2025?", "expected_companies": ["SiemensEnergy"]},
+    {"query": "Compare Siemens and Siemens Energy's segment reporting", "expected_companies": ["Siemens", "SiemensEnergy"]},
+    {"query": "What does Allianz's CFO say about macroeconomic risk?", "expected_companies": ["Allianz"]},
+    {"query": "Compare Allianz and Munich Re's risk reporting", "expected_companies": ["Allianz", "MunichRe"]},
+    {"query": "What is SAP's strategic priority for 2025?", "expected_companies": ["SAP"]},
+    {"query": "What does Infineon say about semiconductor demand outlook?", "expected_companies": ["Infineon"]},
+    {"query": "What does BASF's management report say about chemicals demand?", "expected_companies": ["BASF"]}
+  ]
+}

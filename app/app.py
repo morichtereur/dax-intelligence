@@ -3,7 +3,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import streamlit as st
-from app.retriever import retrieve, get_companies
+from app.retriever import relevant_companies, get_companies
 from app.llm import ask
 
 st.set_page_config(
@@ -63,11 +63,22 @@ with st.sidebar:
     )
 
     n_results = st.slider(
-        "Context depth",
+        "Retrieval depth",
         min_value=4,
         max_value=16,
         value=8,
-        help="More chunks = broader context, slower response"
+        help="How many chunk hits to scan when ranking which companies' "
+             "reports are relevant — the full PDFs for those companies (not "
+             "just the matched chunks) are what Claude actually reads"
+    )
+
+    max_companies = st.slider(
+        "Max companies per query",
+        min_value=1,
+        max_value=8,
+        value=4,
+        help="Caps cost/context: each company attaches its full trimmed "
+             "report PDF, not just a snippet"
     )
 
     st.divider()
@@ -123,31 +134,32 @@ with st.expander("💡 Example queries"):
 if query:
     selected_company = None if company_filter == "All companies" else company_filter
 
-    with st.spinner("Searching reports..."):
-        chunks = retrieve(query, n_results=n_results, company_filter=selected_company)
+    with st.spinner("Finding relevant reports..."):
+        matched_companies = relevant_companies(
+            query, n_results=n_results, company_filter=selected_company,
+            max_companies=max_companies,
+        )
 
-    with st.spinner("Synthesising answer..."):
-        answer = ask(query, chunks, compare_mode=compare_mode)
+    if not matched_companies:
+        st.warning("No matching reports found for this query.")
+    else:
+        with st.spinner(f"Reading {len(matched_companies)} report(s) and synthesising an answer..."):
+            result = ask(query, matched_companies, compare_mode=compare_mode)
 
-    st.markdown("### Answer")
-    st.markdown(answer)
+        st.markdown("### Answer")
+        st.markdown(result["text"])
 
-    # Source companies used
-    source_companies = sorted(set(c["company"] for c in chunks))
-    st.markdown(
-        "**Sources:** " + " · ".join(f"`{c}`" for c in source_companies)
-    )
+        st.markdown(
+            "**Sources:** " + " · ".join(f"`{c}`" for c in matched_companies)
+        )
 
-    with st.expander(f"📄 Source chunks ({len(chunks)})"):
-        for chunk in chunks:
-            col_a, col_b = st.columns([3, 1])
-            with col_a:
-                st.markdown(
-                    f"**{chunk['company']} {chunk['year']}** — "
-                    f"{chunk['section'].replace('_', ' ').title()} — "
-                    f"p.~{chunk['approx_page']}"
-                )
-                st.caption(chunk['text'][:400] + "...")
-            with col_b:
-                st.metric("Relevance", f"{chunk['score']:.2f}")
-            st.divider()
+        citations = result["citations"]
+        with st.expander(f"📄 Citations ({len(citations)})"):
+            if not citations:
+                st.caption("No page-level citations were returned for this answer.")
+            for cite in citations:
+                page_range = (f"p. {cite['start_page']}" if cite['start_page'] == cite['end_page']
+                              else f"pp. {cite['start_page']}–{cite['end_page']}")
+                st.markdown(f"**{cite['document_title']}** — {page_range}")
+                st.caption(f"“{cite['cited_text'][:300]}”")
+                st.divider()

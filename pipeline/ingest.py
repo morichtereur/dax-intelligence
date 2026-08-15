@@ -3,7 +3,8 @@ import hashlib
 from pathlib import Path
 from dotenv import load_dotenv
 import chromadb
-from pypdf import PdfReader
+
+from pdf_utils import extract_text_by_page, get_original_page_offset
 
 load_dotenv()
 
@@ -26,15 +27,6 @@ collection = client.get_or_create_collection(
     metadata={"hnsw:space": "cosine"}
 )
 
-def extract_text_by_page(pdf_path: Path) -> list[dict]:
-    reader = PdfReader(str(pdf_path))
-    pages = []
-    for i, page in enumerate(reader.pages):
-        text = page.extract_text() or ""
-        if text.strip():
-            pages.append({"page": i + 1, "text": text})
-    return pages
-
 def detect_section(text: str) -> str:
     lower = text.lower()
     for marker in SECTION_MARKERS:
@@ -42,11 +34,28 @@ def detect_section(text: str) -> str:
             return marker.replace(" ", "_")
     return "general"
 
-def chunk_text(text: str, chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list[str]:
-    words = text.split()
+def chunk_pages(pages: list[dict], chunk_size: int = CHUNK_SIZE, overlap: int = CHUNK_OVERLAP) -> list[dict]:
+    """Chunk across pages by word count, same window size as before, but
+    keeping each chunk's real page range instead of estimating it later.
+
+    The previous approach joined every page into one string first, chunked
+    that, and then guessed a chunk's page from its position alone
+    (chunk_index / total_chunks * total_pages) -- a linear-interpolation
+    estimate that assumes every page has equal text density, and that drifts
+    further from the truth the longer the document is. Tracking (word, page)
+    pairs from the start makes start_page/end_page exact, not estimated.
+    """
+    word_pages = [(w, p["page"]) for p in pages for w in p["text"].split()]
+
     chunks, i = [], 0
-    while i < len(words):
-        chunks.append(" ".join(words[i:i + chunk_size]))
+    while i < len(word_pages):
+        window = word_pages[i:i + chunk_size]
+        page_nums = [pg for _, pg in window]
+        chunks.append({
+            "text": " ".join(w for w, _ in window),
+            "start_page": min(page_nums),
+            "end_page": max(page_nums),
+        })
         i += chunk_size - overlap
     return chunks
 
@@ -62,30 +71,36 @@ def ingest_pdf(pdf_path: Path):
         print(f"  WARNING: No text extracted — may be scanned/image PDF")
         return
 
-    full_text = "\n".join(p["text"] for p in pages)
     total_pages = pages[-1]["page"]
-    chunks = chunk_text(full_text)
+    offset = get_original_page_offset(pdf_path)
+    chunks = chunk_pages(pages)
 
     ids, docs, metas = [], [], []
     for i, chunk in enumerate(chunks):
         chunk_id = hashlib.md5(f"{pdf_path.name}_{i}".encode()).hexdigest()
-        approx_page = max(1, int((i / len(chunks)) * total_pages))
-        section = detect_section(chunk)
+        section = detect_section(chunk["text"])
 
         ids.append(chunk_id)
-        docs.append(chunk)
+        docs.append(chunk["text"])
         metas.append({
             "company": company,
             "year": year,
             "chunk_index": i,
             "total_chunks": len(chunks),
-            "approx_page": approx_page,
+            # real page range of this chunk in the trimmed file, shifted by
+            # the original report's page offset -- not an estimate
+            "approx_page": chunk["start_page"] + offset - 1,
+            "end_page": chunk["end_page"] + offset - 1,
             "section": section,
             "source": pdf_path.name
         })
 
     collection.upsert(documents=docs, ids=ids, metadatas=metas)
-    print(f"  → {len(chunks)} chunks | {total_pages} pages | {company} {year}")
+    if offset > 1:
+        print(f"  → {len(chunks)} chunks | {total_pages} local pages "
+              f"(original report pages {offset}-{offset + total_pages - 1}) | {company} {year}")
+    else:
+        print(f"  → {len(chunks)} chunks | {total_pages} pages | {company} {year}")
 
 if __name__ == "__main__":
     print(f"Looking for PDFs in: {RAW_DIR.resolve()}\n")

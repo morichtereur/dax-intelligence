@@ -1,0 +1,10 @@
+anthropic
+chromadb
+streamlit
+pypdf
+python-dotenv
+pycryptodome
+rank-bm25
+sentence-transformers
+reportlab<5
+watchdog

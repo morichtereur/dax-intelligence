@@ -48,7 +48,7 @@ _BOLD_RE = _re.compile(r"\*\*(.+?)\*\*")
 
 
 def _render_paragraph(text: str, chunks: list[dict]) -> str:
-    """Escapes raw text, then re-expresses the small slice of Markdown Claude
+    """Escapes raw text, then re-expresses the small slice of Markdown the LLM
     actually produces (**bold**, plus verified/flagged citations) as
     reportlab's inline markup — Paragraph has no Markdown support of its own."""
     pages_by_company = _pages_by_company(chunks)
@@ -124,7 +124,7 @@ def build_memo_pdf(
         canvas.line(20 * mm, 14 * mm, A4[0] - 20 * mm, 14 * mm)
         canvas.setFillColor(MUTED)
         canvas.setFont("PlexMono", 7)
-        canvas.drawString(20 * mm, 9 * mm, "ChromaDB retrieval + hybrid BM25/cross-encoder re-rank · Claude Sonnet synthesis · built by Moritz Richter")
+        canvas.drawString(20 * mm, 9 * mm, "ChromaDB retrieval + hybrid BM25/cross-encoder re-rank · LLM synthesis · built by Moritz Richter")
         canvas.drawRightString(A4[0] - 20 * mm, 9 * mm, f"Page {doc_.page}")
         canvas.restoreState()
 

@@ -666,7 +666,7 @@ roll_slot.markdown(f'<div class="roll-wrap">{"".join(tiles)}</div>', unsafe_allo
 _photo = author_photo_uri()
 _photo_tag = f'<img src="{_photo}"/>' if _photo else ""
 st.markdown(
-    f'<div class="byline">{_photo_tag}<span>ChromaDB retrieval · Claude Sonnet synthesis · '
+    f'<div class="byline">{_photo_tag}<span>ChromaDB retrieval · LLM synthesis · '
     'every claim checked against its source excerpt · built by Moritz Richter</span></div>',
     unsafe_allow_html=True,
 )

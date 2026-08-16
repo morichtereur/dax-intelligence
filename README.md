@@ -32,7 +32,7 @@ Ask questions across 15 DAX company reports (FY2024 & FY2025) and get a research
     cross-encoder (ms-marco-MiniLM-L-6-v2) re-ranks the combined candidate
     pool on actual query/passage relevance
             ↓
-    Claude Sonnet synthesis — cites (Company[, Year], p.N) inline; every
+    LLM synthesis — cites (Company[, Year], p.N) inline; every
     citation is regex-parsed back out and checked against the chunks the
     model actually received before the answer is shown
 
@@ -42,7 +42,7 @@ gate the whole pipeline — a query with no real answer in the corpus never
 reaches the model at all, and a weak-but-present match is shown with an
 explicit low-confidence banner instead of being presented as solid ground.
 
-**Why not send whole PDFs with Claude's native citations API instead?**
+**Why not send whole PDFs with the LLM's native citations API instead?**
 That approach (extracting citations directly from an attached PDF rather
 than verifying a model-written page number) is genuinely more precise per
 citation, and worth using — see `pipeline/trim_pdf.py` and the git history
@@ -81,7 +81,7 @@ Allianz · BASF · Bayer · Beiersdorf · BMW · DHL · Henkel · Infineon · Me
 
 - **Retrieval:** ChromaDB (persistent, cosine similarity) + BM25 (`rank-bm25`) + cross-encoder re-ranking (`sentence-transformers`)
 - **Embeddings:** ChromaDB default (all-MiniLM-L6-v2)
-- **LLM:** Claude Sonnet via Anthropic API
+- **LLM:** Anthropic API
 - **Frontend:** Streamlit
 - **PDF parsing/export:** pypdf, reportlab
 

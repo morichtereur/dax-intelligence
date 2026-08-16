@@ -1,16 +1,29 @@
 import html as _html
 import os
 import re
-import anthropic
 from dotenv import load_dotenv
 
 from app.branding import COMPANIES
+from app.provider import get_provider
 
 load_dotenv()
 
-client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+# The provider is configuration, not a hardcoded SDK call — see app/provider.py
+# for what that claim covers and what it does not.
+_provider = None
 
-MODEL = "claude-sonnet-4-5"
+
+def provider():
+    """Resolved lazily so importing this module needs no SDK and no key —
+    the citation checking below is pure text work and is what the tests
+    exercise."""
+    global _provider
+    if _provider is None:
+        _provider = get_provider()
+    return _provider
+
+
+MODEL = os.getenv("GENERATION_MODEL", "claude-sonnet-4-5")
 
 # List price, $ per 1M tokens — keyed by model id so both ask()'s generation
 # calls and the eval harness's judge calls (a cheaper model) price correctly
@@ -85,17 +98,13 @@ Question: {query}
 Excerpts:
 {context}"""
 
-    response = client.messages.create(
+    completion = provider().complete(
+        system=SYSTEM_PROMPT,
+        user=user_prompt,
         model=MODEL,
         max_tokens=1500,
-        system=SYSTEM_PROMPT,
-        messages=[{"role": "user", "content": user_prompt}]
     )
-    usage = {
-        "input_tokens": response.usage.input_tokens,
-        "output_tokens": response.usage.output_tokens,
-    }
-    return {"text": response.content[0].text, "usage": usage}
+    return {"text": completion.text, "usage": completion.usage}
 
 
 def _pages_by_company(chunks: list[dict]) -> dict[str, dict[str, list[tuple[int, int]]]]:

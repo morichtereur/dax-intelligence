@@ -2,9 +2,11 @@
 
 [![Tests](https://github.com/morichtereur/dax-intelligence/actions/workflows/test.yml/badge.svg)](https://github.com/morichtereur/dax-intelligence/actions/workflows/test.yml)
 
-AI-powered analysis of DAX 40 annual reports — built for finance and strategy professionals.
+**A retrieval-augmented (RAG) research assistant over DAX 40 annual reports, with a citation guardrail and a measured evaluation harness.**
 
 Ask questions across 15 DAX company reports (FY2024 & FY2025) and get a research memo with source citations, an audit trail linking straight back to the exact page of the original filing, and year-over-year framing when both fiscal years are in scope.
+
+The engineering claim is narrower than "it answers questions": **hybrid retrieval** (BM25 and dense search unioned, then cross-encoder re-ranked), a **guardrail** that re-parses every citation out of the generated prose and checks it against the excerpts the model was actually given before the answer is shown, **retrieval and generation evals** with precision@k, recall@k and a claim-level faithfulness judge, and **confidence bands** that stop a query with no support in the corpus from reaching the model at all. Generation sits behind a provider interface (`app/provider.py`), so the model vendor is configuration rather than a rewrite.
 
 ## What it does
 

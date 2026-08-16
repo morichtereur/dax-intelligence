@@ -4,7 +4,7 @@ app/llm.py's ask().
 
 Unlike a citations-API architecture where a citation's *location* can't be
 hallucinated (the API extracts it from the attached PDF), this app has
-Claude write (Company[, YYYY], p.N) into free-text prose from a set of
+the LLM write (Company[, YYYY], p.N) into free-text prose from a set of
 retrieved excerpts, so the location itself can be wrong — that's exactly
 what app/llm.py's verify_citations() ground-truth checks (does that
 company/year/page combination actually appear among the retrieved chunks),

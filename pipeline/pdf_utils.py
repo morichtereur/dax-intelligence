@@ -27,7 +27,7 @@ def extract_section(pdf_path: Path, start_page: int, end_page: int, output_path:
     the corresponding pages of the original filing.
 
     Also relevant to the 600-page (100-page on 200k-context models) PDF
-    limit on the Claude API: a section-trimmed file this way typically lands
+    limit on the LLM API: a section-trimmed file this way typically lands
     at 40-90 pages, comfortably under either cap, without an arbitrary
     page-count cutoff that could split a report mid-section.
 

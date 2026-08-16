@@ -199,7 +199,7 @@ def highlight_citations(answer: str, chunks: list[dict]) -> str:
 
     Streamlit's st.markdown treats a string starting with a block tag like
     <div> as a raw CommonMark "HTML block": once inside it, no Markdown
-    syntax is processed at all, so passing Claude's raw "## Heading" /
+    syntax is processed at all, so passing the LLM's raw "## Heading" /
     "**bold**" straight through a <div> wrapper renders the literal hashes
     and asterisks instead of formatting them. Converting Markdown to HTML
     ourselves here sidesteps that rather than fighting the parser."""

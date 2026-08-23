@@ -1,4 +1,4 @@
-.PHONY: install ingest run test eval-retrieval eval-grounding
+.PHONY: install ingest run test eval-retrieval eval-grounding dashboard dashboard-rerender
 
 VENV := .venv
 PY := $(VENV)/bin/python
@@ -23,3 +23,9 @@ eval-retrieval:  ## precision@k / recall@k against eval/gold_queries.json (free,
 
 eval-grounding:  ## Citation grounding + faithfulness judge — COSTS REAL API CALLS
 	$(PY) eval/eval_grounding.py
+
+dashboard:  ## Record runs against the real index into dashboard.html — COSTS REAL API CALLS
+	$(PY) scripts/build_dashboard.py
+
+dashboard-rerender:  ## Rebuild dashboard.html from the recorded runs — free, no index or key needed
+	$(PY) scripts/build_dashboard.py --from-cache

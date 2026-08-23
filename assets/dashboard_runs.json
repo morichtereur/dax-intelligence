@@ -1,0 +1,594 @@
+[
+ {
+  "run_date": "2026-08-23",
+  "query": "How do Siemens and SAP frame their AI investment strategy?",
+  "note": "The comparative case: one question, two filings, every claim carrying its own page.",
+  "compare": true,
+  "best_score": 0.589,
+  "chunks": [
+   {
+    "company": "SAP",
+    "year": "2024",
+    "section": "management_report",
+    "page": 7,
+    "end_page": 11,
+    "score": 0.589,
+    "via": "embedding",
+    "text": "the gains of the DAX (+19%) and the NASDAQ-100 (+26%). SAP ended the year as Europe’s most valuable tech company, with a market capitalization of nearly €270 billion. In addition to the rising stock market valuation, shareholders will benefit from SAP’s robust performance with an attractive dividend. Given the company’s success in 2024, the Supervisory Board and Executive Board propose a dividend of €2.35 per share…"
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "section": "letter_to_shareholders",
+    "page": 17,
+    "end_page": 18,
+    "score": 0.544,
+    "via": "both",
+    "text": "Committee voted to recommend the Executive Board’s proposal on the appropriation of retained earnings for 2024 to the Supervisory Board for submission to the Annual General Meeting. Besides its recurring agenda items, at its meeting on April 9, 2025, the Committee discussed SAP’s credit rating and its project to improve liquidity at SAP SE level. The Committee convened on July 25, 2025, for a full discussion on the…"
+   },
+   {
+    "company": "Siemens",
+    "year": "2024",
+    "section": "management_report",
+    "page": 20,
+    "end_page": 21,
+    "score": 0.528,
+    "via": "embedding",
+    "text": "corporate activities with customer-specific real estate solutions. With regard to capital expenditures, we expect a significant increase in fiscal 2025. Significant amounts will be invested in the coming years for the construction and expansion of high-tech production facilities in the U.S., China and Singapore in the context of the €2 billion investment strategy presented in fiscal 2023 to strengthen growth,…"
+   },
+   {
+    "company": "SAP",
+    "year": "2024",
+    "section": "management_report",
+    "page": 52,
+    "end_page": 53,
+    "score": 0.518,
+    "via": "both",
+    "text": "across SAP’s suite of enterprise applications and SAP BTP and are grounded in customers’ own business data. SAP offers a range of AI-powered use cases built into core business processes across cloud ERP and finance, supply chain, procurement, human resources (HR), sales, marketing and commerce, as well as in IT and across industries, which are used by more than 30,000 customers. By using these embedded AI…"
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "section": "management_report",
+    "page": 40,
+    "end_page": 42,
+    "score": null,
+    "via": "keyword",
+    "text": "key strategic markets. On August 1, 2025, SAP announced its intent to acquire 100% of SmartRecruiters, a leading talent acquisition (TA) software provider. The transaction closed on September 11, 2025, following satisfaction of regulatory and other approvals. For more information about SmartRecruiters, see the Notes to the Consolidated Financial Statements, Note (D.1). Sapphire Ventures In addition to our…"
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "section": "management_report",
+    "page": 193,
+    "end_page": 194,
+    "score": null,
+    "via": "keyword",
+    "text": "the AI Ethics Steering Committee. Engagement with these stakeholders is continuous and is organized through the standard AI systems development process to make sure that the relevant groups are part of the process chain. The objectives here are for all key stakeholders to contribute directly to and shape the development process, foster collective decision-making, and implement AI ethically and responsibly. Outside…"
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "section": "management_report",
+    "page": 42,
+    "end_page": 43,
+    "score": null,
+    "via": "keyword",
+    "text": "Business Data Cloud (which serves as the data platform across the SAP cloud portfolio, fueling AI capabilities with semantically rich data products). At the same time, new agentic AI capabilities are reshaping the enterprise technology market, and business process execution is shifting from individual applications to an agentic AI layer that runs all critical processes and becomes the new user experience. To lead…"
+   },
+   {
+    "company": "SAP",
+    "year": "2024",
+    "section": "management_report",
+    "page": 122,
+    "end_page": 123,
+    "score": null,
+    "via": "keyword",
+    "text": "SAP has recently received can be found in our News Center. Our sustainability strategy focuses on three pillars – climate action, circularity, and social responsibility – and on the cross-layer of holistic steering and reporting. These pillars reflect the topics that our double materiality assessment identified as material. For more information, see the Double Materiality Assessment section. SAP’s sustainability…"
+   }
+  ],
+  "answer": "# Siemens and SAP AI Investment Strategy Comparison\n\nThe retrieved excerpts provide substantial detail on SAP's AI investment strategy but only limited information on Siemens' AI approach.\n\n## SAP's AI Investment Strategy\n\nSAP positions itself as \"the #1 enterprise application and Business AI company\" and frames AI investment as central to its entire business transformation (SAP 2024, p.8). The company commits to \"significantly increase our AI investments\" in 2025, deploying \"nearly 40,000 developers working to deliver an AI-first portfolio and customer experience\" (SAP 2024, p.8). SAP sets a specific productivity target: making \"every Joule user 30% more efficient by the end of 2025\" (SAP 2024, p.8).\n\nThe company articulates a comprehensive \"AI-First, Suite-First strategy\" where AI is \"not just adding AI capabilities to existing business processes, but adapting our approach to product development\" (SAP 2025, p.41). This involves embedding \"Business AI in every application and business process to boost customer productivity, profitability, and innovation\" (SAP 2025, p.41). Core elements include Joule (the AI user experience layer), Joule Agents (autonomous AI systems that execute workflows), and SAP Business Data Cloud as the data foundation fueling AI capabilities (SAP 2025, p.42).\n\nSAP positions AI as reshaping the entire enterprise technology market, stating that \"business process execution is shifting from individual applications to an agentic AI layer that runs all critical processes and becomes the new user experience\" (SAP 2025, p.42). For 2026, the focus intensifies further, including \"deploying Joule as the new AI user experience for every user; embedding agentic AI into end-to-end business processes to deliver value through AI assistants\" (SAP 2025, p.43).\n\nThe company offers \"a range of AI-powered use cases built into core business processes across cloud ERP and finance, supply chain, procurement, human resources (HR), sales, marketing and commerce, as well as in IT and across industries, which are used by more than 30,000 customers\" (SAP 2024, p.52). In 2025, SAP \"released 30 Joule Agents\" (SAP 2025, p.43).\n\nSAP's AI governance includes an AI Ethics Steering Committee, with \"860 use cases were assessed\" in 2025, of which \"44% of all relevant use cases were recognized as high risk and reviewed\" (SAP 2025, p.194).\n\n## Siemens' AI Investment Strategy\n\nThe excerpts provide minimal detail on Siemens' AI investment strategy. The only reference notes that within Digital Industries, \"the software business likewise increased revenue, profit and profitability, benefiting from the need for digitalization and strong demand for semiconductor design and AI\" (Siemens 2024, p.20). Additionally, Siemens announced at the beginning of fiscal 2025 that it \"signed an agreement to acquire Altair Engineering Inc., U.S., a provider of computational science and artificial intelligence software\" with the transaction \"expected to close in the course of calendar 2025\" (Siemens 2024, p.20).\n\n## Key Differences\n\n**Strategic centrality**: SAP frames AI as core to its entire business model transformation and competitive positioning, while the Siemens excerpts mention AI primarily as one market driver among several (electrification, digitalization, decarbonization) and as part of a software acquisition.\n\n**Investment specificity**: SAP provides concrete targets (40,000 developers, 30% efficiency gains, 30 agents released, 860 use cases assessed), while the Siemens excerpts contain no comparable AI investment metrics.\n\n**Product integration depth**: SAP describes comprehensive integration across its entire portfolio with a dedicated AI experience layer (Joule), whereas the Siemens excerpts do not describe AI product integration.\n\n**Governance structure**: SAP details an elaborate AI ethics governance framework with committees and use case review processes; the Siemens excerpts do not address AI governance.\n\nThe excerpts do not permit a balanced comparison, as Siemens' AI strategy may be described elsewhere in sections not retrieved.",
+  "citations": [
+   {
+    "company": "SAP",
+    "year": "2024",
+    "page": 8,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "page": 41,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "page": 42,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "page": 43,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2024",
+    "page": 52,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "page": 194,
+    "verified": true
+   },
+   {
+    "company": "Siemens",
+    "year": "2024",
+    "page": 20,
+    "verified": true
+   }
+  ],
+  "usage": {
+   "input_tokens": 9499,
+   "output_tokens": 967
+  },
+  "cost": 0.043002,
+  "low_confidence": false,
+  "outcome": "answered"
+ },
+ {
+  "run_date": "2026-08-23",
+  "query": "Compare how BMW and Mercedes-Benz frame EV investment costs",
+  "note": "Two companies describing the same transition in different language.",
+  "compare": true,
+  "best_score": 0.618,
+  "chunks": [
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "section": "management_report",
+    "page": 70,
+    "end_page": 72,
+    "score": 0.618,
+    "via": "both",
+    "text": "property, plant and equipment1 2025 2024 25/24 In millions of euros % change Mercedes-Benz Group 5,482 4,039 +36 thereof Mercedes-Benz Cars 4,074 3,392 +20 thereof Mercedes-Benz Vans 1,233 571 +116 1 The investments in property, plant and equipment correspond to additions to property, plant and equipment in the Consolidated Statement of Cash Flows in the Consolidated Financial Statements. In 2025, investments in…"
+   },
+   {
+    "company": "BMW",
+    "year": "2024",
+    "section": "management_report",
+    "page": 71,
+    "end_page": 72,
+    "score": 0.558,
+    "via": "embedding",
+    "text": "Financial Services segment, the cost of sales increased due to portfolio growth and a rise in refinancing costs. The Group’s research and development expenses increased slightly by 1.4% year on year. The BMW Group’s research and development expenditure to! talled € 9,078 million, as expected well above the previous year’s level (2023: € 7,755 million; +17.1%). The increase was primarily related to the cross!series…"
+   },
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "section": "management_report",
+    "page": 74,
+    "end_page": 76,
+    "score": 0.545,
+    "via": "embedding",
+    "text": "improvements. Annual Report 2025 | Mercedes-Benz Group 74 To Our Shareholders Combined Management Report Declaration on Corporate Governance Consolidated Financial Statements Further Information Overall Assessment of the Financial Year Comparison between the figures forecast for 2025 and their actual development Forecast for 20251 In-year adjustments Actual development 2025 Mercedes-Benz Group Revenue Slightly below…"
+   },
+   {
+    "company": "BMW",
+    "year": "2025",
+    "section": "management_report",
+    "page": 302,
+    "end_page": 304,
+    "score": 0.535,
+    "via": "both",
+    "text": "acquisition cost of leased products. These amounts relate mainly to investment tax credits in the form of tax credits for electric vehicles. It is expected that the investment tax credits can be utilised. The actual utilisation of investment tax credits will, however, depend on the extent to which they can be offset against income tax liabilities and is therefore subject to a degree of uncertainty. 303 BMW Group…"
+   },
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "section": "management_report",
+    "page": 54,
+    "end_page": 56,
+    "score": 0.529,
+    "via": "embedding",
+    "text": "profit attributable to shareholders of Mercedes-Benz Group AG 5,141 10,207 Earnings per share (in euros) For profit attributable to shareholders of Mercedes-Benz Group AG Basic 5.34 10.19 Diluted 5.34 10.19 Annual Report 2025 | Mercedes-Benz Group 54 To Our Shareholders Combined Management Report Declaration on Corporate Governance Consolidated Financial Statements Further Information Profitability, Cash Flows and…"
+   },
+   {
+    "company": "BMW",
+    "year": "2024",
+    "section": "management_report",
+    "page": 300,
+    "end_page": 302,
+    "score": 0.522,
+    "via": "embedding",
+    "text": "deducted from the acquisition cost of leased products. These amounts relate mainly to investment tax credits in the form of tax credits for electric vehicles. It is expected that the investment tax credits can be utilised. The actual utilisation of investment tax credits will, however, depend on the extent to which they can be offset against income tax liabilities and is therefore subject to a degree of uncertainty.…"
+   },
+   {
+    "company": "BMW",
+    "year": "2024",
+    "section": "management_report",
+    "page": 425,
+    "end_page": 427,
+    "score": 0.513,
+    "via": "embedding",
+    "text": "3,597 1,365 2,140 2,530 2,000 2,755 2,828 Effective tax rate % 30.0 28.8 21.0 22.4 26.1 30.1 26.3 18.7 28.5 30.7 Net profit for the year € million 7,678 12,165 18,582 12,463 3,857 5,022 7,064 8,675 6,910 6,396 BMW GROUP TEN/uni00ADYEAR COMPARISON 426 BMW Group Report 2024 To Our Stakeholders Combined Management Report Group Financial Statements Responsibility Statement and Auditor’s Report Remuneration Report Other…"
+   },
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "section": "management_report",
+    "page": 83,
+    "end_page": 85,
+    "score": 0.496,
+    "via": "embedding",
+    "text": "resulting from not fully achieving the CO2 targets, have a counteracting effect. Overall, this will result in a planned adjusted return on sales of between 8 and 10%. The adjusted cash conversion rate for the Mercedes- Benz Vans division is expected to be in a range of 0.1 to 0.3 due to the high level of investment in the announced new vehicle generation. As a result, Mercedes-Benz Vans expects a significant…"
+   }
+  ],
+  "answer": "The retrieved excerpts do not directly compare how BMW and Mercedes-Benz frame EV investment costs. \n\nThe Mercedes-Benz excerpts discuss investments in property, plant and equipment broadly, mentioning \"the introduction of derivatives of the two new drive-flexible (MMA) and electric (MB.EA) architectures\" as a focus area (Mercedes 2025, p.70), but do not break out EV-specific investment costs or characterize them separately from other capital spending. Mercedes reported €4.1 billion in property, plant and equipment investments at Mercedes-Benz Cars in 2025, up from €3.4 billion in 2024, with the increase tied to both \"drive-flexible\" and \"electric\" architectures (Mercedes 2025, p.70).\n\nThe BMW excerpts provided focus on research and development expenditure rather than capital investments in property, plant and equipment. BMW reported research and development expenditure of €9,078 million in 2024, which was \"primarily related to the cross-series digitalisation and electrification of the vehicle fleet\" along with new model development including \"the NEUE KLASSE\" (BMW 2024, p.71). The capitalization rate rose to 38.8% from 33.6% due to \"model-related factors\" (BMW 2024, p.71).\n\nThe excerpts do not contain comparable framing of EV investment costs between the two companies—Mercedes discusses capital expenditure on architectures while BMW discusses R&D expenditure on electrification, making direct comparison impossible from these materials.",
+  "citations": [
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "page": 70,
+    "verified": true
+   },
+   {
+    "company": "BMW",
+    "year": "2024",
+    "page": 71,
+    "verified": true
+   }
+  ],
+  "usage": {
+   "input_tokens": 12064,
+   "output_tokens": 347
+  },
+  "cost": 0.041397,
+  "low_confidence": false,
+  "outcome": "answered"
+ },
+ {
+  "run_date": "2026-08-23",
+  "query": "What does Allianz's CFO say about macroeconomic risk?",
+  "note": "The corpus holds Allianz's risk chapter but no CFO commentary on macro risk. Watch what the model does with that.",
+  "compare": false,
+  "best_score": 0.593,
+  "chunks": [
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 173,
+    "end_page": 174,
+    "score": 0.593,
+    "via": "embedding",
+    "text": "The liquidity risk profile of Allianz predominantly originates from the uncertainty about the volume and timing of cash needs from insurance liabilities and from the collateralization of derivatives . This especially relates to: – coverage of various types of catastrophes in the Property - Casualty business, with the frequency of such events anticipated to increase going forward as a result of the unfolding effects…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 172,
+    "end_page": 173,
+    "score": 0.577,
+    "via": "embedding",
+    "text": "risks, compliance risks as well as legal risks . The Allianz Group’s operational risk primarily refers to losses in either the insurance or the asset management business, or both. The Group’s operational risk capital for the insurance business is dominated by the risk of potential losses from a failure to meet professional obligations, or from the design of products, including mis - selling, non-compliance with…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2024",
+    "section": "management_report",
+    "page": 23,
+    "end_page": 24,
+    "score": 0.574,
+    "via": "embedding",
+    "text": "on a proportional and non -proportional basis. Larger risk concentrations are actively managed via retrocessions on a per risk and per event basis in order to protect our capital. In addition, the reinsurance area within Allianz SE provides reinsurance solutions to external business partners. In 2024, Allianz SE also supported Group initiatives addressing regulatory scrutiny (e.g., DORA), simplification and…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 180,
+    "end_page": 181,
+    "score": 0.523,
+    "via": "embedding",
+    "text": "political agreement between the E .U. Council and the E.U. Parliament in December 2025, the final text of the RIS is expected to be released in the first quarter of 2026 . The initiative aims to empower retail investors (i.e., “consumer” investors) to make investment decisions that are aligned with their needs and preferences, ensuring that they are trea ted fairly and duly protected, thereby encouraging greater…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 178,
+    "end_page": 179,
+    "score": 0.511,
+    "via": "embedding",
+    "text": "Best confirmed Allianz SE’s A+ (Superior) insurer financial strength rating. The outlook on the rating remained “stable”. The rating outlined AM Best’s assessment of Allianz SE’s balance sheet strength as “strongest”, the “ strong” operating performance, and a “very favorable” business profile. Allianz’s insurer financial strength rating by rating agency % As of 31 December 2025 Insurer financial strength rating…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 173,
+    "end_page": 174,
+    "score": 0.505,
+    "via": "embedding",
+    "text": "As part of this process, senior management approves the risk management strategy for the most significant risks and their potential reputational impact. Strategic risk is the risk of a n unexpected decrease in the company’s value arising from adverse management decisions on business strategies and their implementation. C _ Combined Management Report _ Risk and Opportunity Report Annual Report 2025 − Allianz Group…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 188,
+    "end_page": 189,
+    "score": 0.497,
+    "via": "embedding",
+    "text": "share of inflation -linked bonds in the SAA. Equity risk Allianz SE’s equity risk predominantly results from the performance of our strategic insurance participations. Other equity risk stems from listed and unlisted equities, equity derivatives, own shares, and management incentive plans. Risks from changes in equity prices are normally associated with decreasing share prices and increasing equity price…"
+   },
+   {
+    "company": "Allianz",
+    "year": "2025",
+    "section": "management_report",
+    "page": 168,
+    "end_page": 168,
+    "score": 0.495,
+    "via": "embedding",
+    "text": "the management of Allianz SE, certifying the effectiveness of their local internal control systems as well as the completeness, accuracy, and reliability of financial data and non-financial information reported to the Holding. Allianz SE’s Board of Management has defined a strategy for the management of risks, which is aligned with the Allianz Group’s business strategy 1. This risk strategy places particular…"
+   }
+  ],
+  "answer": "The retrieved excerpts do not contain any direct statements from Allianz's CFO about macroeconomic risk. \n\nThe excerpts cover Allianz's risk management framework, governance structure, and various risk categories for fiscal years 2024 and 2025, but none of these sections are attributed to the CFO specifically. The management assessment sections reference \"the management\" collectively rather than individual executives. While the excerpts discuss macroeconomic topics such as geopolitical tensions, market volatility, trade policy uncertainty, and inflation risk, these discussions appear in general management report sections without specific attribution to the Chief Financial Officer.",
+  "citations": [],
+  "usage": {
+   "input_tokens": 9242,
+   "output_tokens": 136
+  },
+  "cost": 0.029766,
+  "low_confidence": false,
+  "outcome": "declined"
+ },
+ {
+  "run_date": "2026-08-23",
+  "query": "Which companies disclosed structural cost reduction programs?",
+  "note": "Open across the whole corpus — the retriever decides who is in the answer.",
+  "compare": true,
+  "best_score": 0.462,
+  "chunks": [
+   {
+    "company": "Infineon",
+    "year": "2024",
+    "section": "management_report",
+    "page": 81,
+    "end_page": 83,
+    "score": 0.462,
+    "via": "embedding",
+    "text": "administrative expenses) remained virtually constant in the 2024 fiscal year at &2,457 million (2023: &2,453 million). Infineon Technologies AG Infineon | Annual Report 2024 80Further informationConsolidated Financial StatementsManagement Board and Supervisory Board Combined Management Report Infineon Technologies AG The net figure for other income and expenses decreased in comparison with the prior fiscal year by…"
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "section": "management_report",
+    "page": 242,
+    "end_page": 244,
+    "score": 0.447,
+    "via": "embedding",
+    "text": "included employee-related benefits such as severance payments and accelerated share-based payment expenses related to the restructuring program. Restructuring payouts totaled €2.5 billion for the full year 2024 and €0.8 billion in 2025. Termination benefits related to SAP’s 2025 workforce optimization program were not presented as restructuring expenses (for more information, see Note (B.2)). If not presented…"
+   },
+   {
+    "company": "Infineon",
+    "year": "2025",
+    "section": "management_report",
+    "page": 53,
+    "end_page": 54,
+    "score": 0.446,
+    "via": "both",
+    "text": "have been adjusted (for details see note 1 to the Consolidated Financial Statements, p. %$ f.). Cost of goods sold in the reporting period amounted to '8,909 million, exceeding the level of the previous year ('8,710 million). Excluding the negative price effects in revenue, the increase in cost of goods sold was lower than the volume-driven increase in revenue. This was mainly attributable to measures initiated in…"
+   },
+   {
+    "company": "Infineon",
+    "year": "2025",
+    "section": "management_report",
+    "page": 54,
+    "end_page": 56,
+    "score": 0.441,
+    "via": "embedding",
+    "text": "net expense of '340 million in the 2024 fiscal year (an increase in the net expense of '89 million). This includes impairment losses on other intangible assets and property, plant and equipment, which totaled '270 million in the 2025 fiscal year (previous year: '84 million). Of this amount, '149 million related to impairment losses associated with the sale of the 200-millimeter production facility in Austin (Texas,…"
+   },
+   {
+    "company": "BASF",
+    "year": "2025",
+    "section": "general",
+    "page": 339,
+    "end_page": 340,
+    "score": 0.422,
+    "via": "embedding",
+    "text": "these hedges. LTI programs led to expenses in the amount of €27 million in 2025 (previous year: €1 million). In both years, losses from divestitures and the disposal of noncurrent assets resulted from costs in connection with various divestment projects and purchase price adjustments for completed divestments. The net expenses from the recognition and reversal of impairments on business-related receivables in 2025…"
+   },
+   {
+    "company": "BASF",
+    "year": "2025",
+    "section": "corporate_governance",
+    "page": 439,
+    "end_page": 440,
+    "score": 0.417,
+    "via": "embedding",
+    "text": "development of standalone businesses – Business strategy of the Agricultural Solutions division and preparation for a possible partial IPO – Gradual startup of the Verbund site in Zhanjiang – Strategy in growth countries – Raw material transformation – Vision and cost-saving program for the Ludwigshafen Verbund site – Roll-out of Winning Culture and Winning Behaviors – Update of medium-term financial planning The…"
+   },
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "section": "management_report",
+    "page": 265,
+    "end_page": 266,
+    "score": null,
+    "via": "keyword",
+    "text": "offered by competitors, excess industry production capacity, the intensity of market competition and consumer demand for the products). These programmes comprise cash offers to dealers and customers as well as lease subsidies or loans at reduced interest rates which are reported as follows: – Revenue is recognized net of sales reductions such as cash discounts and sales incentives granted. – When loans are issued…"
+   },
+   {
+    "company": "Bayer",
+    "year": "2025",
+    "section": "general",
+    "page": 354,
+    "end_page": 355,
+    "score": null,
+    "via": "keyword",
+    "text": "has appealed it. Bayer continues to believe that neither Aprosoja/MT nor other associations or rural producers are entitled to a refund of paid royalties or to a reduction of ongoing royalty payments. MON 87429/MON 94313: In 2022, Corteva Agriscience LLC (“Cort eva”) filed a complaint in a US federal court against Bayer. Corteva alleges infringement of three patents held by Corteva by Bayer’s herbicide tolerance…"
+   }
+  ],
+  "answer": "# Structural Cost Reduction Programs: Cross-Company Comparison\n\nThe retrieved excerpts do not cover this topic for most DAX 40 companies, but three companies disclosed specific structural cost reduction programs:\n\n## Companies with Named Programs\n\n**Infineon** disclosed the most extensive structural improvement program. The company launched its \"Step Up\" program in 2024, incurring restructuring costs of €140 million that year (Infineon 2024, p.81). The program continued into 2025, generating both restructuring and closure expenses of €139 million (Infineon 2025, p.54) plus impairment losses of €74 million on plant and machinery at its Regensburg site (Infineon 2024, p.81). The program delivered measurable operational benefits: cost of goods sold increased less than volume-driven revenue growth due to \"measures initiated in the previous year under the 'Step Up' structural improvement program\" (Infineon 2025, p.53). Research and development expenses also showed positive effects from the program despite higher headcount (Infineon 2025, p.53).\n\n**SAP** disclosed a major restructuring program in 2024, recording €3,144 million in restructuring expenses that year (SAP 2025, p.243). The expenses included employee-related benefits such as severance payments and accelerated share-based payment expenses, with restructuring payouts totaling €2.5 billion for full year 2024 (SAP 2025, p.242). Separately, SAP executed a \"2025 workforce optimization program,\" though termination benefits for this initiative were not presented as restructuring expenses (SAP 2025, p.242). In 2025, restructuring expenses dropped dramatically to negative €3 million (SAP 2025, p.243).\n\n**BASF** referenced a \"Vision and cost-saving program for the Ludwigshafen Verbund site\" that the Supervisory Board discussed during 2025 (BASF 2025, p.439), but provided no financial details or implementation specifics in the excerpts.\n\n## Key Differences\n\nThe programs differ sharply in scale and focus. Infineon's multi-year operational program totaled roughly €350 million across two years with targeted site-level actions (Infineon 2024, p.81; Infineon 2025, p.54). SAP's restructuring was concentrated in a single year at ten times the magnitude—over €3 billion primarily for workforce reduction (SAP 2025, p.242). BASF mentioned its program only in governance discussions without quantification (BASF 2025, p.439).\n\n**Mercedes-Benz** and **Bayer** disclosed no structural cost reduction programs in the excerpts provided.",
+  "citations": [
+   {
+    "company": "Infineon",
+    "year": "2024",
+    "page": 81,
+    "verified": true
+   },
+   {
+    "company": "Infineon",
+    "year": "2025",
+    "page": 54,
+    "verified": true
+   },
+   {
+    "company": "Infineon",
+    "year": "2025",
+    "page": 53,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "page": 243,
+    "verified": true
+   },
+   {
+    "company": "SAP",
+    "year": "2025",
+    "page": 242,
+    "verified": true
+   },
+   {
+    "company": "BASF",
+    "year": "2025",
+    "page": 439,
+    "verified": true
+   }
+  ],
+  "usage": {
+   "input_tokens": 10276,
+   "output_tokens": 625
+  },
+  "cost": 0.040203,
+  "low_confidence": false,
+  "outcome": "answered"
+ },
+ {
+  "run_date": "2026-08-23",
+  "query": "What does Tesla say about its battery supply chain?",
+  "note": "Tesla is not in this corpus at all. The question still retrieves, because carmakers talk alike — which is the failure the confidence band exists for.",
+  "compare": false,
+  "best_score": 0.415,
+  "chunks": [
+   {
+    "company": "VW",
+    "year": "2025",
+    "section": "sustainability",
+    "page": 265,
+    "end_page": 266,
+    "score": 0.415,
+    "via": "embedding",
+    "text": "of utilization-dependent plant control. Value chain decarbonization is the four th material decarbonization lever to achieve the GHG emission reduction targets. We consider the impacts of our products throughout the entire life cycle and at all stages of their value chain. This includes the manufacturin g process with the associated extraction of r a w m a t e r i a l s , m a t e r i a l m a n u f a c t u r i n g ,…"
+   },
+   {
+    "company": "BMW",
+    "year": "2025",
+    "section": "management_report",
+    "page": 122,
+    "end_page": 123,
+    "score": 0.41,
+    "via": "both",
+    "text": "reducing emissions. During the use phase, the biggest lever is the electrification of the product port- folio across all brands. In addition, other drivetrain technolog ies such as hydrogen are being further developed and will be grad- ually integrated into the product range, as is expected to be the case with the BMW iX5 Hydrogen from 2028 onwards The BMW Group is also continuing to improve drivetrain efficiency.…"
+   },
+   {
+    "company": "BMW",
+    "year": "2024",
+    "section": "general",
+    "page": 122,
+    "end_page": 122,
+    "score": null,
+    "via": "keyword",
+    "text": "even if it increases electricity consumption. The plant in Debrecen sources all of its production\"related electricity needs from electricity from renew\" able sources. These decarbonisation levers are helping the BMW Group to achieve its overall targets in a manner which is proportionate to the total volume of emissions allocated to each scope. In the supply chain, the biggest lever for CO 2e\"reducing measures is the…"
+   },
+   {
+    "company": "BMW",
+    "year": "2025",
+    "section": "management_report",
+    "page": 63,
+    "end_page": 64,
+    "score": null,
+    "via": "keyword",
+    "text": "security of supply, boost resilience in the supply chain and encourage the purchasing of raw materials from responsible sources, the BMW Group works closely with partners in the supply chain and secures selected raw materials such as lithium and cobalt directly where necessary. The BMW Group also analyses trends in raw material prices and minimises fluctuations in price by means of hedging on the cap- ital market or…"
+   },
+   {
+    "company": "Mercedes",
+    "year": "2025",
+    "section": "management_report",
+    "page": 131,
+    "end_page": 132,
+    "score": null,
+    "via": "keyword",
+    "text": "implement actions, and regularly report their progress to the Mercedes-Benz Group. Further information on dealing with climate change in the upstream value chain can be found in the chapter “Biodiversity and Ecosystems” under “Requirements for Suppliers”. Suppliers who supply Mercedes-Benz Cars and Mercedes-Benz Vans with production materials must have a certified environmental management system (ISO 14001 or the…"
+   },
+   {
+    "company": "BMW",
+    "year": "2025",
+    "section": "management_report",
+    "page": 214,
+    "end_page": 215,
+    "score": null,
+    "via": "keyword",
+    "text": "in this instance. To ensure that the latter is accu- rately represented, the calculated CO 2e emissions for compo- nents such as the drivetrain, wheels and seats remain un- changed, while the body values are multiplied by a scaling factor when calculating the touring model. The methodology outlined above draws on the established Sphera database LCA f or Ex- perts to ascertai n CO 2e factors for energy, raw materials…"
+   },
+   {
+    "company": "BMW",
+    "year": "2024",
+    "section": "management_report",
+    "page": 64,
+    "end_page": 65,
+    "score": null,
+    "via": "keyword",
+    "text": "itself directly, where required, in order to increase its security of supply, boost resilience in the supply chain and en! courage the purchasing of raw materials from responsible sources. Furthermore, the BMW Group analyses the development of raw materials prices and hedges against price fluctuations – provided the capital market offers the opportunity to do so – or concludes fixed!price agreements. To guarantee…"
+   },
+   {
+    "company": "VW",
+    "year": "2025",
+    "section": "sustainability",
+    "page": 289,
+    "end_page": 290,
+    "score": null,
+    "via": "keyword",
+    "text": "Report. This documents the methodology and actions of the RMDDMS and shows how the Group fulfills its human rights and environmental due diligence obligations in high-risk raw material chains. The RMDDMS focuses particularly on indirect supply chains where the risk analysis has identified increased exposure to environmental and social risks. In-depth assessments are carried out for particularly risky raw materials,…"
+   }
+  ],
+  "answer": "The retrieved excerpts do not cover this. \n\nNone of the provided excerpts are from Tesla's annual reports—they contain only sections from Volkswagen, BMW, and Mercedes-Benz DAX 40 company reports discussing their own battery supply chains and raw material procurement strategies.",
+  "citations": [],
+  "usage": {
+   "input_tokens": 9531,
+   "output_tokens": 63
+  },
+  "cost": 0.029538000000000002,
+  "low_confidence": true,
+  "outcome": "declined"
+ },
+ {
+  "run_date": "2026-08-23",
+  "query": "How do I bake sourdough bread at home?",
+  "note": "Nothing clears the relevance floor, so the model is never called at all.",
+  "compare": false,
+  "best_score": null,
+  "chunks": [],
+  "outcome": "gated"
+ }
+]
